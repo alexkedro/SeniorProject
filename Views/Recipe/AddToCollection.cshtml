@@ -1,0 +1,13 @@
+﻿@model SeniorProject.Models.RecipeViewModels.AddToCollectionViewModel;
+@{
+    ViewData["Title"] = "Add To Collection - " + Model.Recipe.Name;
+}
+<h3>Add To Collection</h3>
+
+<form asp-action="AddToCollection">
+    <label>Add the @Html.DisplayFor(model => model.Recipe.Name) recipe to:</label>
+    <select asp-for="ChoiceID" asp-items="@(new SelectList(Model.Collections, "ID", "Name"))"></select>
+    <input type="hidden" asp-for="RecipeID" value="@Model.Recipe.ID" />
+    <input type="submit" value="Add" class="btn btn-default" />
+</form>
+<a href='javascript:history.go(-1)'>Return to client detail</a>

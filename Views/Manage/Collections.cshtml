@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SeniorProject.Models.ManageViewModels.CollectionViewModel>
+
+@{
+    ViewData["Title"] = "Collections";
+    ViewData.AddActivePage(ManageNavPages.Collections);
+}
+
+<h3>Collections</h3>
+
+<p>
+    <a asp-action="CreateCollection">Create New Collection</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Number of Recepies
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @Html.ActionLink("View", "ViewCollection", new { id = item.ID }) | @Html.ActionLink("Remove", "RemoveCollection", new { id = item.ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

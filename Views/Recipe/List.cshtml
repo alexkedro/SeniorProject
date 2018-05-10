@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SeniorProject.Models.RecipeViewModels.ListViewModel>
+@{
+    ViewData["Title"] = "Admin - Recipes";
+}
+<h3>Admin - Recipes</h3>
+<p>
+    <a asp-action="Create">Create New Recipe</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th></th>
+            <th>Recipe Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Recipe.ID)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Recipe.ID">
+                        <img src="@Url.Content(item.Recipe.ImagePath)" border="0" hspace="0" alt="@item.Recipe.Name" align="left" width="90" height="120">
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Display" asp-route-id="@item.Recipe.ID">
+                        <h3>@Html.DisplayFor(modelItem => item.Recipe.Name)</h3>
+                    </a><br />
+                    <p>
+                        <strong>Cocktail Ingredients: </strong>
+                        @foreach (var ri in item.Amounts)
+                        {
+                            if (ri.Parent == item.Recipe)
+                            {
+                                @String.Concat(ri.Child.Name, ", ")
+                            }
+                        }
+                    </p>
+                </td>
+                <td>
+                    <br />
+                    <br />
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Recipe.ID }) |
+                    @Html.ActionLink("Add an Ingredient", "AddIngredient", new { id = item.Recipe.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Recipe.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

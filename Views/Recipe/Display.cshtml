@@ -1,0 +1,52 @@
+﻿@model SeniorProject.Models.RecipeViewModels.DisplayViewModel;
+@{
+    ViewData["Title"] = Model.Recipe.Name;
+}
+<br />
+<img src="@Url.Content(Model.Recipe.ImagePath)" border="0" hspace="15" alt="@Model.Recipe.Name" align="left" width="90" height="120">
+<h3>@Html.DisplayFor(model => model.Recipe.Name)</h3>
+@Html.ActionLink("Add to Collection", "AddToCollection", new { id = Model.Recipe.ID })<br />
+    <a href='javascript:history.go(-1)'>Return</a>
+<br /><br /><br />
+
+<h3>
+    Cocktail Ingredients:
+    <br />
+</h3>
+<p>To make a @Model.Recipe.Name you will need:</p>
+<ul>
+    @foreach (var item in Model.Amounts)
+    {
+        <li> @Html.DisplayFor(modelItem => item.Ounces) of @Html.DisplayFor(modelItem => item.Child.Name)</li>
+    }
+</ul>
+
+
+<h3>Recipe instructions for a @Html.DisplayFor(model => model.Recipe.Name):</h3>
+@Html.Raw(Model.Recipe.Instructions)
+
+@if (Model.Recipe.History != "")
+{
+    <h3>Cocktail History:</h3>
+    <p>@Html.DisplayFor(model => model.Recipe.History)</p>
+}
+<h3>Additional Notes:</h3>
+@Html.Raw(Model.Recipe.Notes)
+@if (Model.Variations.Count != 0)
+{
+    <h3>Cocktail Variations:</h3>
+    <p>Try switching out...</p>
+    <ul>
+        @foreach (var item in Model.Variations)
+        {
+            <li> The @Html.DisplayFor(modelItem => item.Replacee.Name) with @Html.DisplayFor(modelItem => item.Ounces) of @Html.DisplayFor(modelItem => item.Child.Name)</li>
+        }
+    </ul>
+}
+@if (Model.Recipe.VideoLink != "")
+{
+    <h3>Featured How-To Video: @Html.DisplayFor(model => model.Recipe.Name)</h3>
+    <p>Recipe ingredients, amounts and instructions may vary in this video, so experiment and enjoy your cocktail!</p>
+    <iframe width="560" height="315" src="@Model.Recipe.VideoLink" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+}

@@ -1,0 +1,68 @@
+﻿@model SeniorProject.Models.ManageViewModels.ViewCollectionViewModel
+
+@{
+    ViewData["Title"] = "Collections - " + Model.Collection.Name;
+    ViewData.AddActivePage(ManageNavPages.Collections);
+}
+
+<h3>View Collection - @Html.DisplayFor(model => model.Collection.Name)</h3>
+
+<p>
+    <a asp-action="Collections">Return to Collections</a>
+</p>
+
+<table width="500" border="0" cellpadding="5">
+
+    @foreach (var item in Model.Rows)
+    {
+    <tr>
+        @if (item.r1 != null)
+    {
+        <td align="center" valign="middle">
+            <a asp-action="ViewRecipe" asp-route-id="@item.r1.ID">
+                
+                <img src="@Url.Content(item.r1.ImagePath)" alt="@item.r1.Name" width="90" height="120" />
+                <br />
+                @Html.DisplayFor(modelItem => item.r1.Name)
+            </a>
+        </td>
+}
+        @if (item.r2 != null)
+    {
+        <td align="center" valign="middle">
+            <a asp-action="ViewRecipe" asp-route-id="@item.r2.ID">
+                <img src="@Url.Content(item.r2.ImagePath)" alt="@item.r2.Name" width="90" height="120" />
+                <br />
+                @Html.DisplayFor(modelItem => item.r2.Name)
+            </a>
+        </td>
+}
+        @if (item.r3 != null)
+    {
+        <td align="center" valign="middle">
+            <a asp-action="ViewRecipe" asp-route-id="@item.r3.ID">
+                <img src="@Url.Content(item.r3.ImagePath)" alt="@item.r3.Name" width="90" height="120" />
+                <br />
+                @Html.DisplayFor(modelItem => item.r3.Name)
+            </a>
+        </td>
+}
+        @if (item.r4 != null)
+    {
+        <td align="center" valign="middle">
+            <a asp-action="ViewRecipe" asp-route-id="@item.r4.ID">
+                <img src="@Url.Content(item.r4.ImagePath)" alt="@item.r4.Name" width="90" height="120" />
+                <br />
+                @Html.DisplayFor(modelItem => item.r4.Name)
+            </a>
+        </td>
+}
+
+    </tr>
+    }
+
+</table>
+
+<p>
+    <a asp-action="Collections">Return to Collections</a>
+</p>

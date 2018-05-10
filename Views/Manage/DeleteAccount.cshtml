@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Delete Account";
+    ViewData.AddActivePage(ManageNavPages.Index);
+}
+
+<h4>Are you sure you want to delete your account?</h4>
+<form asp-action="ConfirmDeleteAccount" style="float:left;">
+    <input type="submit" value="Delete" class="btn btn-default" />
+</form>
+<form asp-action="DeleteCancel" style="float:left;">
+    <input type="submit" value="Cancel" class="btn btn-default" />
+</form>

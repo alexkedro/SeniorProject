@@ -1,0 +1,16 @@
+﻿@model SeniorProject.Models.RecipeViewModels.AddIngredientViewModel;
+@{
+    ViewData["Title"] = "Add Ingredient - " + Model.Recipe.Name;
+}
+<h3>Add Ingredient to @Html.DisplayFor(model => model.Recipe.Name)</h3>
+
+<form asp-action="AddIngredient">
+    <label>Ingredient: </label>
+    <select asp-for="IngredientID" asp-items="@(new SelectList(Model.Ingredients, "ID", "Name"))"></select>
+    <br />
+    <label>Amount: </label>
+    <input asp-for="Amount" />
+    <input type="hidden" asp-for="RecipeID" value="@Model.Recipe.ID" />
+    <input type="submit" value="Add" class="btn btn-default" />
+</form>
+<a asp-action="List">Back to List</a>

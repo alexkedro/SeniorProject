@@ -1,0 +1,13 @@
+﻿@model SeniorProject.Models.Recipe
+
+@{
+    ViewData["Title"] = "Delete " + Model.Name;
+}
+
+<h3>Are you sure you want to delete @Html.DisplayFor(model => model.Name)</h3>
+<div>
+     <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="List">Back to List</a>
+    </form>
+</div>

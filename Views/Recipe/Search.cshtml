@@ -1,0 +1,47 @@
+﻿@model SeniorProject.Models.RecipeViewModels.SearchViewModel
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h3>Search</h3>
+<br />
+
+<form asp-action="Search">
+    <label>Search: </label>
+    <input asp-for="Parameter" value=@Model.Parameter />
+    <label>Recipes I need </label>
+    <input asp-for="Off" value=@Model.Off max="99" min="-1"/>
+    <label>or more ingredients for (-1 to ignore)</label>
+    <input type="submit" value="Search" />
+</form>
+
+<table class="table">
+    <tbody>
+        @foreach (var item in Model.Recipes)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Display" asp-route-id="@item.ID">
+                        <img src="@Url.Content(item.ImagePath)" border="0" hspace="0" alt="@item.Name" align="left" width="90" height="120">
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Display" asp-route-id="@item.ID">
+                        <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
+                    </a><br />
+                    <p>
+                        <strong>Cocktail Ingredients: </strong>
+                        @foreach (var ri in Model.Amounts)
+                        {
+                            if (ri.Parent == item)
+                            {
+                                @String.Concat(ri.Child.Name, ", ")
+                            }
+                        }
+                    </p>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
